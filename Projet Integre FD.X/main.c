@@ -9,10 +9,14 @@
 #include <stdlib.h>
 #include "init_uart.h"
 #include "init.h"
+#include "init_PWM.h"
 
+//#define TEST_UART
+#define PWM
 /*
  * 
  */
+#ifdef TEST_UART
 int main(int argc, char** argv) {
     init();
     init_uart();
@@ -45,4 +49,18 @@ int main(int argc, char** argv) {
 //return (EXIT_SUCCESS);    
     return 0;
 }
+#endif
 
+#ifdef PWM
+int i;
+int main(int argc, char** argv) {
+    init();
+    init_PWM();
+    T2CONbits.TON = 1; //demarrage timer
+    T3CONbits.TON = 1;
+    while(1){
+        //permet au programme de rester dans cette boucle sans rénéitialiser le timer
+    }
+    return 0;
+}
+#endif
